@@ -1,24 +1,34 @@
 ---
 import "@/styles/global.css";
-import { ModeToggle } from '@/components/ModeToggle';
+import { ModeToggle } from "@/components/ModeToggle";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Image } from "astro:assets";
+import logo from "../images/reaction.svg";
 ---
+
 <script is:inline>
-	const getThemePreference = () => {
-		if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-			return localStorage.getItem('theme');
-		}
-		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-	};
-	const isDark = getThemePreference() === 'dark';
-	document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
- 
-	if (typeof localStorage !== 'undefined') {
-		const observer = new MutationObserver(() => {
-			const isDark = document.documentElement.classList.contains('dark');
-			localStorage.setItem('theme', isDark ? 'dark' : 'light');
-		});
-		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-	}
+  const getThemePreference = () => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme");
+    }
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  };
+  const isDark = getThemePreference() === "dark";
+  document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+
+  if (typeof localStorage !== "undefined") {
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.classList.contains("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  }
 </script>
 <html lang="en">
   <head>
@@ -31,11 +41,39 @@ import { ModeToggle } from '@/components/ModeToggle';
   <body
     class="dark:bg-[#222222] bg-[#f5f5f5] absolute inset-0 h-full w-full bg-[radial-gradient(#22222266,transparent_1px)] dark:bg-[radial-gradient(#f5f5f566,transparent_1px)] [background-size:16px_16px]"
   >
-    <h1
-      class="text-6xl font-bold flex justify-center text-blue-400 dark:text-white"
-    >
-      Reaction
-    </h1>
-    <ModeToggle client:load />
+    <nav class="flex justify-between items-center max-w-4xl mx-auto py-4 px-2">
+      <Image src={logo} alt="Reaction" class="w-12 h-12" />
+      <div class="flex flex-1 items-center justify-center gap-4 sm:gap-8 mx-2">
+        <Button variant="link" className="p-0 text-md sm:text-2xl">Articles</Button>
+        <Button variant="link" className="p-0 text-md sm:text-2xl">Writers</Button>
+        <Button variant="link" className="p-0 text-md sm:text-2xl">Contact</Button>
+      </div>
+      <div class="flex items-center gap-0.5 sm:gap-2">
+        <ModeToggle client:load />
+        <div class="flex items-center">
+          <Input
+            type="search"
+            className="px-3 py-2 w-52 sm:inline-block hidden"
+            placeholder="Search..."
+          />
+          <Button variant="outline" className="sm:hidden px-3 py-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width={1.5}
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+              ></path>
+            </svg>
+          </Button>
+        </div>
+      </div>
+    </nav>
   </body>
 </html>
