@@ -1,0 +1,54 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import { Button } from "@/components/ui/button";
+import { Image } from "astro:assets";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  TwitterIcon,
+} from "lucide-react";
+import { CustomHoverCard } from "@/components/CustomHoverCard";
+---
+
+<MainLayout>
+  <div class="flex flex-col items-center space-y-4 h-full">
+    <Image
+      alt="Profile Picture"
+      class="w-32 h-32 rounded-full border-2 border-gray-900"
+      height="120"
+      src="https://images.unsplash.com/photo-1457449940276-e8deed18bfff?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      style={{
+        aspectRatio: "120/120",
+        objectFit: "cover",
+      }}
+      width="120"
+    />
+    <h1 class="text-2xl font-bold">John Doe</h1>
+    <p class="text-gray-500 dark:text-gray-400">Full Stack Web Developer</p>
+    <div class="flex gap-4">
+      <Button size="icon" variant="ghost">
+        <InstagramIcon className="h-5 w-5" />
+        <span class="sr-only">Instagram</span>
+      </Button>
+      <Button size="icon" variant="ghost">
+        <TwitterIcon className="h-5 w-5" />
+        <span class="sr-only">Twitter</span>
+      </Button>
+      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <title>X</title><path
+          d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+        ></path></svg
+      >
+      <CustomHoverCard client:load />
+      <Button size="icon" variant="ghost">
+        <FacebookIcon className="h-5 w-5" />
+        <span class="sr-only">Facebook</span>
+      </Button>
+      <Button size="icon" variant="ghost">
+        <LinkedinIcon className="h-5 w-5" />
+        <span class="sr-only">LinkedIn</span>
+      </Button>
+    </div>
+  </div>
+</MainLayout>
