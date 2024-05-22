@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Image } from "astro:assets";
 import logo from "../images/reaction.svg";
 import { Analytics } from "@vercel/analytics/react";
-import SpeedInsights from "@vercel/speed-insights/astro";
 ---
-
+<script>
+  import { injectSpeedInsights } from '@vercel/speed-insights';
+  injectSpeedInsights({});
+</script>
 <script is:inline>
   const getThemePreference = () => {
     if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
@@ -31,7 +33,6 @@ import SpeedInsights from "@vercel/speed-insights/astro";
       attributeFilter: ["class"],
     });
   }
-  <SpeedInsights />;
 </script>
 <html lang="en">
   <head>
