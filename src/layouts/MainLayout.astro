@@ -4,11 +4,29 @@ import { ModeToggle } from "@/components/ModeToggle";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Image } from "astro:assets";
-import logo from "../images/reaction.svg";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import logo from "../images/logo.svg";
+import '@fontsource-variable/alexandria';
 import { Analytics } from "@vercel/analytics/react";
 ---
+
+<style>
+  body {
+    animation: space 600s infinite linear;
+    font-family: 'Alexandria Variable', sans-serif;
+  }
+
+  @keyframes space {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 10000px 5000px;
+    }
+  }
+</style>
 <script>
-  import { injectSpeedInsights } from '@vercel/speed-insights';
+  import { injectSpeedInsights } from "@vercel/speed-insights";
   injectSpeedInsights({});
 </script>
 <script is:inline>
@@ -37,27 +55,27 @@ import { Analytics } from "@vercel/analytics/react";
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/images/reaction.svg" />
+    <link rel="icon" type="image/svg+xml" href="/images/logo.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Reaction</title>
   </head>
-  <body class="flex flex-col bg-transparent absolute inset-0 h-full w-full bg-[radial-gradient(#22222266,transparent_1px)] dark:bg-[radial-gradient(#f5f5f566,transparent_1px)] [background-size:16px_16px]">
+  <body
+    class="flex flex-col bg-transparent absolute inset-0 h-full w-full bg-[radial-gradient(#22222266,transparent_1px)] dark:bg-[radial-gradient(#f5f5f566,transparent_1px)] [background-size:16px_16px]"
+  >
     <Analytics />
-    <nav class="flex justify-between items-center min-h-14 max-w-6xl mx-auto py-4 bg-transparent">
+    <nav
+      class="flex justify-between items-center min-h-14 max-w-6xl mx-auto py-4 bg-transparent"
+    >
       <a href="/" class="bg-transparent">
         <Image src={logo} alt="Reaction" class="w-12 h-12 bg-transparent" />
       </a>
-      <div class="flex flex-1 items-center justify-center gap-4 sm:gap-8 mx-2 bg-transparent">
-        <a href="/" class="p-0 text-md sm:text-xl">
-          Portfolio
-        </a>
-        <a href="/" class="p-0 text-md sm:text-xl">
-          Blog
-        </a>
-        <a href="/info" class="p-0 text-md sm:text-xl">
-          Contact
-        </a>
+      <div
+        class="flex flex-1 items-center justify-center gap-4 sm:gap-8 mx-2 bg-transparent"
+      >
+        <a href="/" class="p-0 text-md sm:text-xl"> Portfolio </a>
+        <a href="/" class="p-0 text-md sm:text-xl"> Blog </a>
+        <a href="/info" class="p-0 text-md sm:text-xl"> Contact </a>
       </div>
       <div class="flex items-center gap-0.5 sm:gap-2 bg-transparent">
         <ModeToggle client:load />
@@ -68,20 +86,9 @@ import { Analytics } from "@vercel/analytics/react";
             placeholder="Search..."
           />
           <Button variant="outline" className="sm:hidden px-3 py-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width={1.5}
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-              ></path>
-            </svg>
+            <MagnifyingGlassIcon
+              className="h-[1.2rem] w-[1.2rem] bg-transparent"
+            />
           </Button>
         </div>
       </div>
@@ -89,7 +96,9 @@ import { Analytics } from "@vercel/analytics/react";
     <main class="max-w-4xl mx-auto flex-1 bg-transparent">
       <slot />
     </main>
-    <footer class="flex justify-center items-center py-4 min-h-14 bg-transparent">
+    <footer
+      class="flex justify-center items-center py-4 min-h-14 bg-transparent"
+    >
       <p class="text-sm text-gray-500 bg-transparent">
         &copy; 2024 Reaction. All rights reserved.
       </p>
