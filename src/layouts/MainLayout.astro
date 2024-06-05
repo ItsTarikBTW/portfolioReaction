@@ -1,21 +1,23 @@
 ---
 import "@/styles/global.css";
 import { ModeToggle } from "@/components/ModeToggle";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { LanguageSelecter } from "@/components/component/LanguageSelecter";
 import { Image } from "astro:assets";
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import logo from "../images/logo.svg";
 import '@fontsource-variable/alexandria';
+import i18next, { t } from "i18next";
 import { Analytics } from "@vercel/analytics/react";
 ---
+<script>
+  import { injectSpeedInsights } from "@vercel/speed-insights";
+  injectSpeedInsights({});
+</script>
 
 <style>
   body {
     animation: space 600s infinite linear;
     font-family: 'Alexandria Variable', sans-serif;
   }
-
   @keyframes space {
     from {
       background-position: 0 0;
@@ -25,10 +27,6 @@ import { Analytics } from "@vercel/analytics/react";
     }
   }
 </style>
-<script>
-  import { injectSpeedInsights } from "@vercel/speed-insights";
-  injectSpeedInsights({});
-</script>
 <script is:inline>
   const getThemePreference = () => {
     if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
@@ -52,13 +50,13 @@ import { Analytics } from "@vercel/analytics/react";
     });
   }
 </script>
-<html lang="en">
+<html lang={i18next.language}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/images/logo.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Reaction</title>
+    <title>{t("site.title")}</title>
   </head>
   <body
     class="flex flex-col bg-transparent absolute inset-0 h-full w-full bg-[radial-gradient(#22222266,transparent_1px)] dark:bg-[radial-gradient(#f5f5f566,transparent_1px)] [background-size:16px_16px]"
@@ -79,18 +77,7 @@ import { Analytics } from "@vercel/analytics/react";
       </div>
       <div class="flex items-center gap-0.5 sm:gap-2 bg-transparent">
         <ModeToggle client:load />
-        <div class="flex items-center bg-transparent">
-          <Input
-            type="search"
-            className="px-3 py-2 w-52 sm:inline-block hidden"
-            placeholder="Search..."
-          />
-          <Button variant="outline" className="sm:hidden px-3 py-2">
-            <MagnifyingGlassIcon
-              className="h-[1.2rem] w-[1.2rem] bg-transparent"
-            />
-          </Button>
-        </div>
+        <LanguageSelecter />
       </div>
     </nav>
     <main class="max-w-4xl mx-auto flex-1 bg-transparent">
