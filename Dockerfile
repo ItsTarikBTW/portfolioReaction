@@ -1,9 +1,18 @@
 FROM node:lts AS build
 WORKDIR /app
+
+COPY package.json package-lock.json ./
+
+RUN npm install
+
 COPY . .
-RUN npm i
+
 RUN npm run build
 
-FROM httpd:2.4 AS runtime
-COPY --from=build /app/dist /usr/local/apache2/htdocs/
+FROM nginx:alpine
+
+COPY --from=build /app/dist /usr/share/nginx/html
+
 EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
